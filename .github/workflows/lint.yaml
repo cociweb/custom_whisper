@@ -1,0 +1,28 @@
+name: Lint Add-on
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  lint:
+    name: Lint add-on ${{ matrix.addon }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        addon: ["custom_whisper"]
+
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v4.1.1
+
+      - name: 🚀 Run Home Assistant Add-on Lint
+        uses: frenck/action-addon-linter@v2.15
+        with:
+          path: "./${{ matrix.addon }}"

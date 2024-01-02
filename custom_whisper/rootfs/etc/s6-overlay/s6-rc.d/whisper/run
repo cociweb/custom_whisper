@@ -1,0 +1,14 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start Whisper service
+# ==============================================================================
+exec python3 -m wyoming_faster_whisper \
+    --uri 'tcp://0.0.0.0:10300' \
+    --model "$(bashio::config 'model')" \
+    --beam-size "$(bashio::config 'beam_size')" \
+    --language "$(bashio::config 'language')" \
+    --data-dir /data \
+    --download-dir /data \
+    --custom_model_name "$(bashio::config 'custom_model_name')" \
+    --custom_model_url "$(bashio::config 'custom_model_url')" 

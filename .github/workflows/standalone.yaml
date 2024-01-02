@@ -1,0 +1,59 @@
+name: Build Standalone
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push_to_registries:
+    name: Build Standalone
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    strategy:
+      matrix:
+        addon: ["standalone_whisper"]
+        arch: ["aarch64", "amd64"]
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+#      - name: Get information
+#        id: info
+#        uses: home-assistant/actions/helpers/info@master
+#        with:
+#          path: ./${{ matrix.addon }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.ACTION_TOKEN }}
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: "Build & push Standalone Docker image: ${{ matrix.arch }}"
+        with:
+#          directory: "standalone_whisper"
+          image: "${{ matrix.arch }}-${{ matrix.addon }}"
+          dockerfile: "standalone_whisper/Dockerfile"
+#          buildArgs: "standalone_whisper/build.yaml"
+#          target: ${{matrix.addon}}
+#          platform: ${{ matrix.arch }}
+          tags: latest
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.ACTION_TOKEN }}
+          pushImage: true
+#          imageName: "${{ github.repository_owner }}/${{ matrix.arch }}-${{ matrix.addon }}"
+
+#      - name: Build ${{ matrix.arch }} Standalone Docker
+#        if: contains(steps.info.outputs.architectures, matrix.arch)
+#        uses: home-assistant/builder@2023.12.0
+#        with:
+#          args: |
+#            --${{ matrix.arch }} \
+#            --target ${{matrix.addon}} \
+#            --image "${{ matrix.arch }}-${{ matrix.addon }}" \
+#            --docker-hub "ghcr.io/${{ github.repository_owner }}"
