@@ -32,6 +32,6 @@ configuration:
       URL of a customized Whisper model that will be used for transcription.
 
       The repository should contain at least the following files: `model.bin`,
-      `vocabulary.txt`, `config.json`. Additionaly a `hash.json` is required with the hash code of each files.
+      `vocabulary.txt`, `config.json`. Additionaly a `hash.json` is required with md5sum hash code of each files.
 network:
   10300/tcp: Whisper Wyoming Protocol

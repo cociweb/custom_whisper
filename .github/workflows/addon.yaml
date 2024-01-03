@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+    tags: [ 'v*.*.*' ]
 
 jobs:
   build:
@@ -31,7 +32,7 @@ jobs:
           password: ${{ secrets.ACTION_TOKEN }}
 
       - name: Build ${{ matrix.arch }} add-on
-        if: contains(steps.info.outputs.architectures, matrix.arch)
+#        if: github.event_name == 'push' && contains(github.ref, '/tags/v')
         uses: home-assistant/builder@2023.12.0
         with:
           args: |

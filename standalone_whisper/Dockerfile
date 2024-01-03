@@ -28,7 +28,7 @@ COPY standalone_whisper/replacables ./
 
 LABEL org.opencontainers.image.source https://github.com/cociweb/custom_whisper
 
-USER nobody
+#USER nobody
 EXPOSE 10300
 
 ENTRYPOINT ["bash", "/run.sh"]

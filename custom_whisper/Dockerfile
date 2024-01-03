@@ -17,7 +17,6 @@ RUN apt-get install -y --no-install-recommends \
 RUN python3 -m venv myenv \
     && . ./myenv/bin/activate
 
-#RUN rm /usr/local/lib/python3.11/EXTERNALLY-MANAGED
 RUN rm /usr/lib/python3.11/EXTERNALLY-MANAGED
 
 RUN pip3 install --no-cache-dir -U  --upgrade pip
@@ -33,7 +32,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
 COPY rootfs /
-WORKDIR /usr/local/lib/python3.11/site-packages/wyoming_faster_whisper/
+WORKDIR /usr/local/lib/python3.11/dist-packages/wyoming_faster_whisper/
 COPY replacables/download.py ./
 COPY replacables/__main__.py ./
 

@@ -58,7 +58,7 @@ Increasing the beam size will increase accuracy at the cost of performance.
 
 ## Custom model
 
-There is a possibility to add a custom model from a remote folder (from a repository or from a webpage). The folder should contain the `model.bin`, `vocabulary.txt`, `config.json` and `hash.json`. The `hash.json` file should contain the XYZ type hash of the first 3 files in JSON format.
+There is a possibility to add a custom model from a remote folder (from a repository or from a webpage). The folder should contain the `model.bin`, `vocabulary.txt`, `config.json` and `hash.json`. The `hash.json` file should contain the md5sum type hash of the first 3 files in JSON format.
 
 Eg:
 ```
