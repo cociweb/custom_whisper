@@ -11,4 +11,4 @@ exec python3 -m wyoming_faster_whisper \
     --data-dir /data \
     --download-dir /data \
     --custom_model_name "$(bashio::config 'custom_model_name')" \
-    --custom_model_url "$(bashio::config 'custom_model_url')" 
+    --custom_model_url "$(bashio::config 'custom_model_url')"

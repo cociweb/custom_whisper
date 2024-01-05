@@ -81,15 +81,20 @@ def download_custom_model(model_url_prefix, dest_dir: Union[str, Path]) -> Path:
         shutil.rmtree(model_dir)
 
     dest_dir.mkdir(parents=True, exist_ok=True)
+    model_dir.mkdir(parents=True, exist_ok=True)
+    _LOGGER.debug("Dest_dir is %s and the model_dir is %s", dest_dir, model_dir )
 
-    filelist = ["/model.bin", "/vocabulary.txt", "/config.json", "/hash.json"]
+
+    filelist = ["model.bin", "vocabulary.txt", "config.json", "hash.json"]
 
     for fname in filelist:
         model_url = model_url_prefix+fname
         try:
-            with urlopen(model_url) as d, open(fname, "wb") as savefile:
+            with urlopen(model_url) as d, open(model_dir / fname, "wb") as savefile:
                 data = d.read()
                 savefile.write(data)
+                savefile.close()
+                _LOGGER.info("%s is downloaded into %s from url: %s", fname, model_dir, model_url )
         except Exception as e:
             _LOGGER.warning("Download failed on  %s from %s! Info: %s", fname, model_url, e)
 
@@ -126,9 +131,14 @@ def find_model(model: FasterWhisperModel, dest_dir: Union[str, Path]) -> Optiona
 
     if model.value == FasterWhisperModel.CUSTOM.value:
         try:
-            with open( model_dir + "/hash.json", "r") as hash_file:
-                model_hash = json.load(hash_file)
-                expected_hash = model_hash["model.bin"]
+            with open( model_dir / "hash.json", "r") as hash_file:
+                custom_model_hash = json.load(hash_file)
+                filtered_files = ["model.bin", "config.json", "vocabulary.txt"]
+
+                expected_hash: Dict[str, str] = {}
+                for elements in filtered_files:
+                    expected_hash[elements] = custom_model_hash[elements]
+
 
         except Exception as e:
             _LOGGER.warning("Retreive of hash failed on custom model: %s", e)

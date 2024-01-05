@@ -6,6 +6,11 @@ configuration:
       Number of candidates to consider simultaneously during transcription.
       Increasing the beam size will increase accuracy at the cost of
       performance.
+  compute_type:
+    name: Computation type
+    description: >-
+       The translator exposes the option `compute_type` that accepts values.
+       Reference: https://opennmt.net/CTranslate2/quantization.html#quantize-on-model-loading
   language:
     name: Language
     description: >-

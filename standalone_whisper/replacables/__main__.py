@@ -27,18 +27,6 @@ async def main() -> None:
         help="Name of faster-whisper model to use",
     )
     parser.add_argument(
-        "--custom_model_url",
-        action="store_true",
-        help="URL of HuggingFace repository. model.bin, vocabulary.txt, config.json, hash.json is required there!",
-        default=False
-    )
-    parser.add_argument(
-        "--custom_model_name",
-        action="store_true",
-        help="Name of the HuggingFace repository",
-        default=False
-    )
-    parser.add_argument(
         "--uri",
         required=True,
         help="unix:// or tcp://"
@@ -65,7 +53,7 @@ async def main() -> None:
     parser.add_argument(
         "--compute-type",
         default="default",
-        help="Compute type (float16, int8, etc.)",
+        help="Compute type (default, auto, int8, int_float32, int8_float16, int8_bfloat16, int16, float16, float32, bfloat16)",
     )
     parser.add_argument(
         "--beam-size",
@@ -76,6 +64,14 @@ async def main() -> None:
         "--debug",
         action="store_true",
         help="Log DEBUG messages"
+    )
+    parser.add_argument(
+        "--custom_model_name",
+        help="Name of the HuggingFace repository",
+    )
+    parser.add_argument(
+        "--custom_model_url",
+        help="URL of HuggingFace repository. model.bin, vocabulary.txt, config.json, hash.json is required there!",
     )
     args = parser.parse_args()
 
@@ -100,17 +96,32 @@ async def main() -> None:
         asr_model_attr_url = "https://github.com/rhasspy/models/"
 
     model_dir: Optional[Path] = None
-    for data_dir in args.data_dir:
-        model_dir = find_model(model, data_dir)
-        if model_dir is not None:
-            break
+    if args.model.lower() != FasterWhisperModel.CUSTOM:
+        for data_dir in args.data_dir:
+            _LOGGER.debug("data_dir:  %s", data_dir)
+            model_dir = find_model(model, data_dir)
+            _LOGGER.debug("model_dir:  %s", model_dir)
+            if model_dir is not None:
+                break
+
     if model_dir is None:
-        if args.model.lower() == FasterWhisperModel.CUSTOM:
-            _LOGGER.info("Downloading custom model %s to %s", args.custom_model_name, args.download_dir)
-            model_dir = download_custom_model(args.custom_model_url, args.download_dir)
-        else:
-            _LOGGER.info("Downloading %s to %s", model, args.download_dir)
-            model_dir = download_model(model, args.download_dir)
+        for data_dir in args.data_dir:
+            _LOGGER.debug("model_dir is inconsistent, re-downloading model:  %s", data_dir)
+            if args.model.lower() == FasterWhisperModel.CUSTOM:
+                _LOGGER.info("Downloading custom model %s to %s", args.custom_model_name, args.download_dir)
+                model_dir_d = download_custom_model(args.custom_model_url, args.download_dir)
+                model_dir_h = find_model(model, data_dir)
+                if model_dir_d == model_dir_h:
+                    model_dir = model_dir_h
+                    _LOGGER.info("Succesfully downloaded the custom model: %s", model.value)
+                else:
+                    model_dir = model_dir_d
+                    _LOGGER.warning("Hash check for the custom model is failed! Please consider the security implications!")
+                    _LOGGER.warning("Trying to load the custom model without correct hash check: %s", model.value)
+
+            else:
+                _LOGGER.info("Downloading %s to %s", model, args.download_dir)
+                model_dir = download_model(model, args.download_dir)
 
     if args.language == "auto":
         # Whisper does not understand "auto"
