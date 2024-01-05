@@ -30,7 +30,7 @@ configuration:
     description: |
       Name of a customized Whisper model that will be used for transcription.
 
-      To take into account the `model` should be `custom`
+      To take into account the `model` should be `custom` and url should be definied!
   custom_model_url:
     name: URL of Custom model repository.
     description: |
@@ -38,5 +38,8 @@ configuration:
 
       The repository should contain at least the following files: `model.bin`,
       `vocabulary.txt`, `config.json`. Additionaly a `hash.json` is required with md5sum hash code of each files.
+
+      Don't forget to append the `/resolve/{branch}/` at the end!
+      Eg: `https://huggingface.co/Hungarians/whisper-tiny-cv16-v2-int8.hu/resolve/main/`
 network:
   10300/tcp: Whisper Wyoming Protocol
