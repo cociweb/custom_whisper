@@ -58,7 +58,7 @@ Increasing the beam size will increase accuracy at the cost of performance.
 
 ## Custom model
 
-There is a possibility to add a custom model from a remote folder (from a repository or from a webpage). The folder should contain the `model.bin`, `vocabulary.txt`, `config.json` and `hash.json`. The `hash.json` file should contain the md5sum type hash of the first 3 files in JSON format.
+There is a possibility to add a custom model from a remote folder (from a repository or from a webpage). The remote folder of the model should contain the `model.bin`, `vocabulary.txt`, `config.json` and `hash.json`. The `hash.json` file should contain the md5sum type hash of the first 3 files in JSON format.
 
 Eg:
 ```
@@ -70,6 +70,9 @@ Eg:
 ```
 
 In this case, the `model` field should be `custom`, and add the parent folder url of the model to the `Custom model url` field.
+
+Don't forget to append the `/resolve/{branch}/` at the end of the repository's url. The custom_model_url should look like eg. this:
+`https://huggingface.co/Hungarians/whisper-tiny-cv16-v2-int8.hu/resolve/main/`
 
 ## Backups
 
