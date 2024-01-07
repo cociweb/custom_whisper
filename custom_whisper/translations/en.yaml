@@ -9,7 +9,7 @@ configuration:
   compute_type:
     name: Computation type
     description: >-
-       The translator exposes the option `compute_type` that accepts values.
+       The translator exposes the option `compute_type` that accepts values. The default value is `default`: Best fits for the model and the device.
        Reference: https://opennmt.net/CTranslate2/quantization.html#quantize-on-model-loading
   language:
     name: Language
@@ -40,6 +40,6 @@ configuration:
       `vocabulary.txt`, `config.json`. Additionaly a `hash.json` is required with md5sum hash code of each files.
 
       Don't forget to append the `/resolve/{branch}/` at the end!
-      Eg: `https://huggingface.co/Hungarians/whisper-tiny-cv16-v2-int8.hu/resolve/main/`
+      Eg: `https://huggingface.co/Hungarians/faster-whisper-tiny-cv16-int8.hu/resolve/main/`
 network:
   10300/tcp: Whisper Wyoming Protocol

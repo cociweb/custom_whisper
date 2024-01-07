@@ -56,6 +56,10 @@ Number of candidates to consider simultaneously during transcription (see [beam 
 
 Increasing the beam size will increase accuracy at the cost of performance.
 
+### Option: `compute_type`
+
+There is the possibility to quantise the model on loading. It is recommended to set it to default to let the system to choose the best for the model or you can force set to an appropriate [value](https://opennmt.net/CTranslate2/quantization.html#quantize-on-model-loading). Please take into consideration the architecture and device limitations and also take a look for the their [fallbacks](https://opennmt.net/CTranslate2/quantization.html#implicit-type-conversion-on-load)
+
 ## Custom model
 
 There is a possibility to add a custom model from a remote folder (from a repository or from a webpage). The remote folder of the model should contain the `model.bin`, `vocabulary.txt`, `config.json` and `hash.json`. The `hash.json` file should contain the md5sum type hash of the first 3 files in JSON format.
@@ -72,7 +76,7 @@ Eg:
 In this case, the `model` field should be `custom`, and add the parent folder url of the model to the `Custom model url` field.
 
 Don't forget to append the `/resolve/{branch}/` at the end of the repository's url. The custom_model_url should look like eg. this:
-`https://huggingface.co/Hungarians/whisper-tiny-cv16-v2-int8.hu/resolve/main/`
+`https://huggingface.co/Hungarians/faster-whisper-tiny-cv16-int8.hu/resolve/main/`
 
 ## Backups
 

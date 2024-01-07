@@ -8,7 +8,7 @@ services:
     volumes:
       - custom_whisper_data:/data
     restart: always
-    command: --model custom --language hu --beam-size 5 --compute-type int8 --custom_model_name "My customized Whisper Model" --custom_model_url "https://huggingface.co/Hungarians/whisper-base-cv16-v2-int8.hu/resolve/main/"
+    command: --model custom --language hu --beam-size 1 --compute-type int8 --custom_model_name "My customized Whisper Model" --custom_model_url "https://huggingface.co/Hungarians/faster-whisper-base-cv16-int8.hu/resolve/main/"
     deploy:
       resources:
         limits:
