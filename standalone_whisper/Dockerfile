@@ -21,7 +21,9 @@ RUN sed -i -e 's/==1.1.0/>=1.1.0/g' \
         -e 's/Programming Language :: Python :: 3.10/Programming Language :: Python :: 3.11/g' \
         METADATA
 WORKDIR /usr/src
-RUN pip3 install --no-cache-dir -U --upgrade wyoming ctranslate tokenizers
+RUN pip3 install --no-cache-dir -U --upgrade wyoming
+RUN pip3 install --no-cache-dir -U --upgrade ctranslate
+RUN pip3 install --no-cache-dir -U --upgrade tokenizers
 RUN  apt-get purge -y --auto-remove \
         build-essential \
         python3-dev
