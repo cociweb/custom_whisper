@@ -22,7 +22,7 @@ RUN sed -i -e 's/==1.1.0/>=1.1.0/g' \
         METADATA
 WORKDIR /usr/src
 RUN pip3 install --no-cache-dir -U --upgrade wyoming
-RUN pip3 install --no-cache-dir -U --upgrade ctranslate
+RUN pip3 install --no-cache-dir -U --upgrade ctranslate2
 RUN pip3 install --no-cache-dir -U --upgrade tokenizers
 RUN  apt-get purge -y --auto-remove \
         build-essential \
