@@ -25,6 +25,13 @@ RUN pip3 install --no-cache-dir -U \
         wheel
 RUN pip3 install --no-cache-dir \
         "wyoming-faster-whisper==${WHISPER_VERSION}"
+WORKDIR /usr/local/lib/python3.11/dist-packages/wyoming_faster_whisper-1.0.1.dist-info/
+RUN sed -i -e 's/==1.1.0/>=1.1.0/g' \
+        -e 's/==0.13.3/>=0.13.3/g' \
+        -e 's/Programming Language :: Python :: 3.10/Programming Language :: Python :: 3.11/g' \
+        METADATA
+WORKDIR /usr/src
+RUN pip3 install --no-cache-dir -U --upgrade wyoming ctranslate2 tokenizers
 RUN apt-get purge -y --auto-remove \
         build-essential \
         python3-dev
