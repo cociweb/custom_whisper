@@ -2,13 +2,13 @@ version: '3.7'
 services:
   custom_whisper:
     container_name: custom_whisper
-    image: ghcr.io/cociweb/amd64-standalone_whisper:latest
+    image: ghcr.io/cociweb/amd64_cpu-standalone_whisper:latest
     ports:
       - 10300:10300
     volumes:
       - custom_whisper_data:/data
     restart: always
-    command: --model custom --language hu --beam-size 1 --compute-type int8 --custom_model_name "My customized Whisper Model" --custom_model_url "https://huggingface.co/Hungarians/faster-whisper-base-cv16-int8.hu/resolve/main/"
+    command: --model custom --language hu --device cpu --beam-size 1 --compute-type int8 --custom_model_name "My customized Whisper Model" --custom_model_url "https://huggingface.co/Hungarians/whisper-tiny-cv16-hu-v3/resolve/main/int8/"
     deploy:
       resources:
         limits:

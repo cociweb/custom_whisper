@@ -40,6 +40,6 @@ configuration:
       `vocabulary.txt`, `config.json`. Additionaly a `hash.json` is required with md5sum hash code of each files.
 
       Don't forget to append the `/resolve/{branch}/` at the end!
-      Eg: `https://huggingface.co/Hungarians/faster-whisper-tiny-cv16-int8.hu/resolve/main/`
+      Eg: `https://huggingface.co/Hungarians/whisper-tiny-cv16-hu-v3/resolve/main/fp32/`
 network:
   10300/tcp: Whisper Wyoming Protocol

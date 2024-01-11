@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  custom_whisper:
+    container_name: custom_whisper
+    image: ghcr.io/cociweb/amd64_cuda-standalone_whisper:latest
+    ports:
+      - 10300:10300
+    volumes:
+      - custom_whisper_data:/data
+    restart: always
+    command: --model custom --language hu --device cuda --beam-size 1 --compute-type float32 --custom_model_name "My customized Whisper Model" --custom_model_url "https://huggingface.co/Hungarians/whisper-medium-cv16-hu/resolve/main/fp32/"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+# If you would like to limit your cpu/memory resources, uncomment (and adjust) the following lines:
+#        limits:
+#          cpus: "4.0"
+#          memory: 8096M
+
+volumes:
+  custom_whisper_data:

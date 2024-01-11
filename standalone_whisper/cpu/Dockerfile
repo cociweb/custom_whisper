@@ -21,18 +21,16 @@ RUN sed -i -e 's/==1.1.0/>=1.1.0/g' \
         -e 's/Programming Language :: Python :: 3.10/Programming Language :: Python :: 3.11/g' \
         METADATA
 WORKDIR /usr/src
-RUN pip3 install --no-cache-dir -U --upgrade wyoming
-RUN pip3 install --no-cache-dir -U --upgrade ctranslate2
-RUN pip3 install --no-cache-dir -U --upgrade tokenizers
+RUN pip3 install --no-cache-dir -U --upgrade wyoming ctranslate2 tokenizers
 RUN  apt-get purge -y --auto-remove \
         build-essential \
         python3-dev
 RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
-COPY standalone_whisper/run.sh ./
+COPY standalone_whisper/common/run.sh ./
 WORKDIR /usr/local/lib/python3.11/site-packages/wyoming_faster_whisper/
-COPY standalone_whisper/replacables ./
+COPY standalone_whisper/common/replacables ./
 
 
 LABEL org.opencontainers.image.source https://github.com/cociweb/custom_whisper

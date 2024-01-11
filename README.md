@@ -25,24 +25,11 @@ Supports [amd64 Architecture][amd64-shield] and [aarch64 Architecture][aarch64-s
 ## How to Install as a Standalone Docker Container
 
 ```
-version: '3.7'
-services:
-  custom_whisper:
-    container_name: custom_whisper
-    image: ghcr.io/cociweb/amd64-standalone_whisper:latest
-    ports:
-      - 10300:10300
-    volumes:
-      - custom_whisper_data:/data
-    restart: always
-    command: --model custom --language hu --beam-size 5 --compute-type int8 --custom_model_name "My customized Whisper Model" --custom_model_url "https://huggingface.co/Hungarians/faster-whisper-base-cv16-int8.hu/resolve/main/"
-    deploy:
-      resources:
-        limits:
-          cpus: "4.0"
-          memory: 8096M
+{% standalone_whisper.cpu.docker-compose %}
+```
 
-volumes:
-  custom_whisper_data:
+## How to Install as a Standalone Docker Container with GPU (CUDA) support
 
+```
+{% standalone_whisper.cuda.docker-compose %}
 ```
