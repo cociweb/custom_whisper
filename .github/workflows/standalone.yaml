@@ -35,7 +35,7 @@ jobs:
         name: "Build & push Standalone Docker image: ${{ matrix.arch }}-${{ matrix.device }}""
         with:
           image: "${{ matrix.arch }}_${{ matrix.device }}-${{ matrix.addon }}"
-          dockerfile: "${{ matrix.addon }}/${{ matrix.device }}"/Dockerfile"
+          dockerfile: "${{ matrix.addon }}/${{ matrix.device }}/Dockerfile"
           tags: latest
           registry: ghcr.io
           username: ${{ github.repository_owner }}
