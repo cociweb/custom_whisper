@@ -41,4 +41,3 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.ACTION_TOKEN }}
           pushImage: true
-
