@@ -2,8 +2,12 @@
 
 ## 1.1.0
 
-- Upgrade to `wyoming-whisper` 1.1.0
-- Allow custom model
+This release is customized build of the Whisper add-on v1.0.0 from NabuCasa.
+- Allow custom model in `wyoming-faster-whisper`
+- Bump `wyoming` to 1.2.0
+- Bump `ctranslate2` to 3.23.0
+- Bump `tokenizers` to 0.15.0
+- Bump Python from 3.10 to 3.11
 
 ## 1.0.0
 
