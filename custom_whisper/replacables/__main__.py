@@ -44,7 +44,7 @@ async def main() -> None:
     parser.add_argument(
         "--device",
         default="cpu",
-        help="Device to use for inference (default: cpu)",
+        help="Device to use for inference (cpu)",
     )
     parser.add_argument(
         "--language",
@@ -157,7 +157,7 @@ async def main() -> None:
     _LOGGER.debug("Loading %s", model_dir)
     whisper_model = WhisperModel(
         str(model_dir),
-        device=args.device,
+        device=args.device.lower(),
         compute_type=args.compute_type,
     )
 
