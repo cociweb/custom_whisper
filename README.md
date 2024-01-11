@@ -24,14 +24,14 @@ Supports [amd64 Architecture][amd64-shield] and [aarch64 Architecture][aarch64-s
 
 ## How to Install as a Standalone Docker Container
 
-```
-{% include-markdown "./standalone_whisper/cpu/docker-compose.yml"
+``` markdown
+{% include "./standalone_whisper/cpu/docker-compose.yml"
    comments=true %}
 ```
 
 ## How to Install as a Standalone Docker Container with GPU (CUDA) support
 
-```
-{% include-markdown "./standalone_whisper/cuda/docker-compose.yml"
+``` markdown
+{% include "./standalone_whisper/cuda/docker-compose.yml"
    comments=true %}
 ```
