@@ -25,9 +25,9 @@ Supports [amd64 Architecture][amd64-shield] and [aarch64 Architecture][aarch64-s
 ## How to Install as a Standalone Docker Container
 
 
-Example [docker-compose.yml](https://github.com/cociweb/custom_whisper/standalone_whisper/cpu/docker-compose.yml) file.
+Example [docker-compose.yml](https://raw.githubusercontent.com/cociweb/custom_whisper/main/standalone_whisper/cpu/docker-compose.yml) file.
 
 
 ## How to Install as a Standalone Docker Container with GPU (CUDA) support
 
-Example [docker-compose.yml](https://github.com/cociweb/custom_whisper/standalone_whisper/cuda/docker-compose.yml) file.
+Example [docker-compose.yml](https://raw.githubusercontent.com/cociweb/custom_whisper/main/standalone_whisper/cuda/docker-compose.yml) file.
