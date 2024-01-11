@@ -6,6 +6,8 @@ This add-on will be maintained only while the official product will be able to h
 
 Supports [amd64 Architecture][amd64-shield] and [aarch64 Architecture][aarch64-shield] only. Other archs are not planned to be supported!!! See [CTranslate2 HW limitation](https://opennmt.net/CTranslate2/hardware_support.html)
 
+GPU (CUDA) support added as well.
+
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armhf-shield]: https://img.shields.io/badge/armhf-no-red.svg

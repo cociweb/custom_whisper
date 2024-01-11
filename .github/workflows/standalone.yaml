@@ -16,6 +16,7 @@ jobs:
     strategy:
       matrix:
         addon: ["standalone_whisper"]
+        device: ["cpu", "cuda"]
         arch: ["aarch64", "amd64"]
 
     steps:
@@ -31,13 +32,12 @@ jobs:
 
       - uses: mr-smithers-excellent/docker-build-push@v6
 #        if: github.event_name == 'push' && contains(github.ref, '/tags/v')
-        name: "Build & push Standalone Docker image: ${{ matrix.arch }}"
+        name: "Build & push Standalone Docker image: ${{ matrix.arch }}-${{ matrix.device }}"
         with:
-          image: "${{ matrix.arch }}-${{ matrix.addon }}"
-          dockerfile: "standalone_whisper/Dockerfile"
+          image: "${{ matrix.arch }}_${{ matrix.device }}-${{ matrix.addon }}"
+          dockerfile: "${{ matrix.addon }}/${{ matrix.device }}/Dockerfile"
           tags: latest
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.ACTION_TOKEN }}
           pushImage: true
-

@@ -76,7 +76,7 @@ Eg:
 In this case, the `model` field should be `custom`, and add the parent folder url of the model to the `Custom model url` field.
 
 Don't forget to append the `/resolve/{branch}/` at the end of the repository's url. The custom_model_url should look like eg. this:
-`https://huggingface.co/Hungarians/faster-whisper-tiny-cv16-int8.hu/resolve/main/`
+`https://huggingface.co/Hungarians/whisper-tiny-cv16-hu-v3/resolve/main/fp32/`
 
 ## Backups
 
