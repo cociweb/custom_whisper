@@ -41,5 +41,8 @@ EXPOSE 10300
 ENTRYPOINT ["bash", "/run.sh"]
 
 # Health check
-HEALTHCHECK --interval=5m --timeout=3s --start-period=30s \
-   CMD nc -z localhost 10300 || exit 1
+HEALTHCHECK --interval=30s --timeout=3s --start-period=30s \
+        CMD echo '{ "type": "describe" }' \
+        | nc -w 1 localhost 10300 \
+        | grep -q "faster-whisper" \
+        || exit 1
