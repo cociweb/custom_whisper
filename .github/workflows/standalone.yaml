@@ -5,6 +5,7 @@ on:
     branches:
       - main
     tags: [ 'v*.*.*' ]
+  workflow_dispatch:
 
 jobs:
   push_to_registries:
@@ -18,6 +19,11 @@ jobs:
         addon: ["standalone_whisper"]
         device: ["cpu", "cuda"]
         arch: ["aarch64", "amd64"]
+        include:
+          - platform: "linux/arm64"
+            arch: "aarch64"
+          - platform: "linux/amd64"
+            arch: "amd64"
 
     steps:
       - name: Check out the repo
@@ -38,6 +44,8 @@ jobs:
           dockerfile: "${{ matrix.addon }}/${{ matrix.device }}/Dockerfile"
           tags: latest
           registry: ghcr.io
+          multiPlatform: true
+          platform: ${{ matrix.platform }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.ACTION_TOKEN }}
           pushImage: true
