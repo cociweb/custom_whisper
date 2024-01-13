@@ -44,7 +44,7 @@ jobs:
           dockerfile: "${{ matrix.addon }}/${{ matrix.device }}/Dockerfile"
           tags: latest
           registry: ghcr.io
-          multiPlatform: true
+          multiPlatform: false
           platform: ${{ matrix.platform }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.ACTION_TOKEN }}
