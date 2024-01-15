@@ -18,14 +18,7 @@ jobs:
       matrix:
         addon: ["standalone_whisper"]
         device: ["cpu", "cuda"]
-        arch: ["aarch64", "amd64"]
-        platform: ["linux/arm64", "linux/amd64"]
-        exclude:
-          - platform: "linux/arm64"
-            arch: "amd64"
-          - platform: "linux/amd64"
-            arch: "aarch64"
-
+        type: [ {arch: "aarch64", platform: "linux/arm64"}, {arch: "amd64", platform: "linux/amd64"} ]
 
 
     steps:
@@ -39,16 +32,20 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.ACTION_TOKEN }}
 
-      - uses: mr-smithers-excellent/docker-build-push@v6
-#        if: github.event_name == 'push' && contains(github.ref, '/tags/v')
-        name: "Build & push Standalone Docker image: ${{ matrix.arch }}-${{ matrix.device }}"
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
         with:
-          image: "${{ matrix.arch }}_${{ matrix.device }}-${{ matrix.addon }}"
-          dockerfile: "${{ matrix.addon }}/${{ matrix.device }}/Dockerfile"
+          platforms: ${{ matrix.type.arch }}
+
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: "Build & push Standalone Docker image: ${{ matrix.type.arch }}-${{ matrix.device }}"
+        with:
+          image: "${{ matrix.type.arch }}_${{ matrix.device }}-${{ matrix.addon }}_dev"
+          dockerfile: "${{ matrix.addon }}/${{ matrix.device }}/${{ matrix.type.arch }}-Dockerfile"
           tags: latest
           registry: ghcr.io
-          multiPlatform: true
-          platform: ${{ matrix.platform }}
+          platform: ${{ matrix.type.platform }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.ACTION_TOKEN }}
           pushImage: true
