@@ -2,7 +2,7 @@
 
 Customized Whisper add-on for Home Assistant.
 
-The Addon re-uses the original (v1.0.0) [Whisper Add-on](https://github.com/home-assistant/addons/tree/master/whisper) of Nabu Casa / Rhasspy which is based on [wyoming-whisper](https://github.com/rhasspy/wyoming-faster-whisper) (v1.0.1) library.
+The Addon re-uses the original (v1.0.0) [Whisper Add-on](https://github.com/home-assistant/addons/tree/master/whisper) of Nabu Casa / Rhasspy which is based on a [wyoming-whisper](https://github.com/rhasspy/wyoming-faster-whisper) (v1.1.0) and [wyoming](https://github.com/rhasspy/wyoming) (v1.5.2) libraries.
 
 This add-on will be maintained only while the official product will be able to handle custom models.
 
