@@ -1,0 +1,52 @@
+name: Build and Test Standalone
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  push_to_registries:
+    name: Build Standalone
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    strategy:
+      matrix:
+        addon: ["standalone_whisper"]
+        device: ["cpu", "cuda"]
+        type: [ {arch: "aarch64", platform: "linux/arm64"}, {arch: "amd64", platform: "linux/amd64"} ]
+
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.ACTION_TOKEN }}
+
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: ${{ matrix.type.arch }}
+
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: "Build & push Standalone Docker image: ${{ matrix.type.arch }}-${{ matrix.device }}"
+        with:
+          image: "${{ matrix.type.arch }}_${{ matrix.device }}-${{ matrix.addon }}"
+          dockerfile: "${{ matrix.addon }}/${{ matrix.device }}/${{ matrix.type.arch }}-Dockerfile"
+          tags: latest
+          registry: ghcr.io
+          platform: ${{ matrix.type.platform }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.ACTION_TOKEN }}
+          pushImage: false
