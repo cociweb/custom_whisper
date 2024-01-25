@@ -1,6 +1,6 @@
 # Home Assistant Add-on: Custom Whisper
 
-Standalone (distributed) version of Home Assistant add-on that uses [wyoming-whisper](https://github.com/rhasspy/wyoming-faster-whisper) (v1.0.1) library for speech-to-text.
+Standalone (distributed) version of Home Assistant add-on that uses [wyoming-faster-whisper](https://github.com/rhasspy/wyoming-faster-whisper) (v1.1.0) and [wyoming](https://github.com/rhasspy/wyoming) (v1.5.2) libraries for speech-to-text.
 
 This add-on will be maintained only while the official product will be able to handle custom models.
 

@@ -108,7 +108,7 @@ def download_model(model: FasterWhisperModel, dest_dir: Union[str, Path]) -> Pat
     Returns directory of downloaded model.
     """
     dest_dir = Path(dest_dir)
-    model_dir = dest_dir / model.value
+    model_dir = dest_dir / FasterWhisperModel(model).value
 
     if model_dir.is_dir():
         # Remove model directory if it already exists
@@ -116,7 +116,7 @@ def download_model(model: FasterWhisperModel, dest_dir: Union[str, Path]) -> Pat
 
     dest_dir.mkdir(parents=True, exist_ok=True)
 
-    model_url = URL_FORMAT.format(model=model.value)
+    model_url = URL_FORMAT.format(model=FasterWhisperModel(model).value)
     with urlopen(model_url) as response:
         with tarfile.open(mode="r|*", fileobj=response) as tar_gz:
             tar_gz.extractall(dest_dir)
@@ -127,9 +127,9 @@ def download_model(model: FasterWhisperModel, dest_dir: Union[str, Path]) -> Pat
 def find_model(model: FasterWhisperModel, dest_dir: Union[str, Path]) -> Optional[Path]:
     """Returns model directory if model exists."""
     dest_dir = Path(dest_dir)
-    model_dir = dest_dir / model.value
+    model_dir = dest_dir / FasterWhisperModel(model).value
 
-    if model.value == FasterWhisperModel.CUSTOM.value:
+    if FasterWhisperModel(model).value == FasterWhisperModel.CUSTOM.value:
         try:
             with open( model_dir / "hash.json", "r") as hash_file:
                 custom_model_hash = json.load(hash_file)

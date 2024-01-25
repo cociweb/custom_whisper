@@ -9,6 +9,7 @@ from typing import Optional
 from wyoming.info import AsrModel, AsrProgram, Attribution, Info
 from wyoming.server import AsyncServer
 
+from . import __version__
 from .const import WHISPER_LANGUAGES
 from .download import FasterWhisperModel, download_model, download_custom_model, find_model
 from .faster_whisper import WhisperModel
@@ -66,6 +67,17 @@ async def main() -> None:
         help="Log DEBUG messages"
     )
     parser.add_argument(
+        "--log-format",
+        default=logging.BASIC_FORMAT,
+        help="Format for log messages"
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=__version__,
+        help="Print version and exit",
+    )
+    parser.add_argument(
         "--custom_model_name",
         help="Name of the HuggingFace repository",
     )
@@ -79,7 +91,9 @@ async def main() -> None:
         # Download to first data dir by default
         args.download_dir = args.data_dir[0]
 
-    logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
+    logging.basicConfig(
+        level=logging.DEBUG if args.debug else logging.INFO, format=args.log_format
+    )
     _LOGGER.debug(args)
 
     # Look for model
@@ -137,6 +151,7 @@ async def main() -> None:
                     url="https://github.com/guillaumekln/faster-whisper/",
                 ),
                 installed=True,
+                version=__version__,
                 models=[
                     AsrModel(
                         name = asr_model_name,
@@ -177,8 +192,12 @@ async def main() -> None:
 
 # -----------------------------------------------------------------------------
 
+def run() -> None:
+    asyncio.run(main())
+
+
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        run()
     except KeyboardInterrupt:
         pass

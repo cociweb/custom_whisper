@@ -17,10 +17,10 @@ RUN pip3 install --no-cache-dir -U \
         wheel
 RUN pip3 install --no-cache-dir \
         --extra-index-url https://www.piwheels.org/simple \
-        "wyoming-faster-whisper==1.0.1"
-WORKDIR /usr/local/lib/python3.10/dist-packages/wyoming_faster_whisper-1.0.1.dist-info/
-RUN sed -i -e 's/==1.1.0/>=1.1.0/g' \
-        -e 's/==0.13.3/>=0.13.3/g' \
+        "wyoming-faster-whisper==1.1.0"
+WORKDIR /usr/local/lib/python3.10/dist-packages/wyoming_faster_whisper-1.1.0.dist-info/
+RUN sed -i -e 's/==1.5.2/>=1.5.2/g' \
+        -e 's/==0.15.1/>=0.15.1/g' \
         METADATA
 WORKDIR /usr/src
 RUN pip3 install --no-cache-dir -U --upgrade wyoming ctranslate2 tokenizers

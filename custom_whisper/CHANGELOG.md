@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.1
+
+This release is customized build of the Whisper add-on v1.0.0 from NabuCasa.
+- Allow custom model in `wyoming-faster-whisper`
+- Bump `wyoming-faster-whisper` to 1.1.0
+- Bump `wyoming` to 1.5.2
+- Bump `ctranslate2` to 3.24.0
+- Bump `tokenizers` to 0.15.1
+
+
 ## 1.1.0
 
 This release is customized build of the Whisper add-on v1.0.0 from NabuCasa.
@@ -7,7 +17,7 @@ This release is customized build of the Whisper add-on v1.0.0 from NabuCasa.
 - Bump `wyoming` to 1.2.0
 - Bump `ctranslate2` to 3.23.0
 - Bump `tokenizers` to 0.15.0
-- Bump Python from 3.10 to 3.11
+- Bump Python from 3.10 to 3.11 (except GPU/CuDA accelerated builds)
 
 ## 1.0.0
 
