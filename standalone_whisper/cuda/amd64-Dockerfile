@@ -16,7 +16,6 @@ RUN pip3 install --no-cache-dir -U \
         setuptools \
         wheel
 RUN pip3 install --no-cache-dir \
-        --extra-index-url https://www.piwheels.org/simple \
         "wyoming-faster-whisper==1.1.0"
 WORKDIR /usr/local/lib/python3.10/dist-packages/wyoming_faster_whisper-1.1.0.dist-info/
 RUN sed -i -e 's/==1.5.2/>=1.5.2/g' \
