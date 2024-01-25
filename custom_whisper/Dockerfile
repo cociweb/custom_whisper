@@ -48,6 +48,7 @@ COPY rootfs /
 WORKDIR /usr/local/lib/python3.11/dist-packages/wyoming_faster_whisper/
 COPY replacables/download.py ./
 COPY replacables/__main__.py ./
+COPY replacables/handler.py ./
 
 LABEL org.opencontainers.image.source https://github.com/cociweb/custom_whisper
 
