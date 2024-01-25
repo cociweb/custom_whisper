@@ -25,18 +25,19 @@ RUN pip3 install --no-cache-dir -U  --upgrade pip
 RUN pip3 install --no-cache-dir -U \
         setuptools \
         wheel
-RUN pip3 install --no-cache-dir -U --upgrade wyoming ctranslate2 tokenizers
 
 WORKDIR /
 ADD https://github.com/rhasspy/wyoming-faster-whisper/archive/refs/tags/v${WYOMING_FASTER_WHISPER_VERSION}.tar.gz wyoming_faster_whisper-${WYOMING_FASTER_WHISPER_VERSION}.tar.gz
 RUN ls -lah
 RUN pip3 install --no-cache-dir wyoming_faster_whisper-${WYOMING_FASTER_WHISPER_VERSION}.tar.gz
 #        "wyoming-faster-whisper==${WYOMING_FASTER_WHISPER_VERSION}"
-WORKDIR /usr/local/lib/python3.11/dist-packages/wyoming_faster_whisper-1.1.0.dist-info/
+WORKDIR /usr/local/lib/python3.11/dist-packages/wyoming_faster_whisper-${WYOMING_FASTER_WHISPER_VERSION}.dist-info/
 RUN ls -lah
-RUN sed -i -e 's/==1.5.2/>=1.5.2/g' \
-        -e 's/==0.15.1/>=0.15.1/g' \
+RUN sed -i -e 's/==1.2.0/>=1.5.2/g' \
+        -e 's/==0.13.3/>=0.15.1/g' \
         METADATA
+RUN pip3 install --no-cache-dir -U --upgrade wyoming ctranslate2 tokenizers
+
 WORKDIR /usr/src
 RUN apt-get purge -y --auto-remove \
         build-essential \
