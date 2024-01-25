@@ -1,10 +1,10 @@
-name: Build and Publish Standalone
+name: Build and Test Standalone
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
-    tags: [ 'v*.*.*' ]
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -48,4 +48,4 @@ jobs:
           platform: ${{ matrix.type.platform }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.ACTION_TOKEN }}
-          pushImage: true
+          pushImage: false
