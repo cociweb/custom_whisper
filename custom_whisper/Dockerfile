@@ -51,7 +51,7 @@ COPY replacables/download.py ./
 COPY replacables/__main__.py ./
 COPY replacables/handler.py ./
 COPY replacables/VERSION ./
-COPY replacables/_init__.py ./
+COPY replacables/__init__.py ./
 
 LABEL org.opencontainers.image.source https://github.com/cociweb/custom_whisper
 
