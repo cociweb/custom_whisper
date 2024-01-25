@@ -1,4 +1,4 @@
-name: Build Standalone
+name: Build and Publish Standalone
 
 on:
   push:

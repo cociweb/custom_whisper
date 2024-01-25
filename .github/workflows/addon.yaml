@@ -1,4 +1,4 @@
-name: Build Add-on
+name: Build and Publish Add-on
 
 on:
   push:
