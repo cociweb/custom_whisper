@@ -34,6 +34,6 @@ jobs:
             --${{ matrix.arch }} \
             --target ${{matrix.addon}} \
             --image "${{ matrix.arch }}-addon-whisper" \
-            --docker-hub "ghcr.io/${{ github.repository_owner }}"
+            --docker-hub "ghcr.io/${{ github.repository_owner }}" \
             --test
 
