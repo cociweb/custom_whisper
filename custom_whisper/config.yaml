@@ -1,5 +1,5 @@
 ---
-version: 1.1.0
+version: 1.1.1
 slug: whisper
 name: Custom Whisper
 description: Speech-to-text with Customized Whisper

@@ -3,5 +3,5 @@ build_from:
   amd64: ghcr.io/home-assistant/amd64-base-debian:bookworm
   aarch64: ghcr.io/home-assistant/aarch64-base-debian:bookworm
 args:
-  WYOMING_FASTER_WHISPER_VERSION: 1.1.0
+  WYOMING_FASTER_WHISPER_VERSION: 1.0.2
   WYOMING_VERSION: 1.5.2
