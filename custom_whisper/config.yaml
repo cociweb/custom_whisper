@@ -3,7 +3,7 @@ version: 1.1.0
 slug: whisper
 name: Custom Whisper
 description: Speech-to-text with Customized Whisper
-url: https://github.com/cociweb/custom_whisper/`
+url: https://github.com/cociweb/custom_whisper/
 arch:
   - amd64
   - aarch64
