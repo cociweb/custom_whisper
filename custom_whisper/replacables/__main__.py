@@ -147,6 +147,7 @@ async def main() -> None:
                         ),
                         installed=True,
                         languages=WHISPER_LANGUAGES,
+                        version="1.0",
                     )
                 ],
             )
